@@ -1,3 +1,6 @@
+const dotenv = require('dotenv') // .env file
+dotenv.config() // using .env
+
 // (1), (2), (3) create and export the app object
 
 var createError = require('http-errors');
@@ -16,7 +19,7 @@ var app = express();  // (2)
 
 // Set up mongoose connection
 const mongoose = require("mongoose");
-const mongoDB = "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.6jiio2q.mongodb.net/local_library?retryWrites=true&w=majority";
+const mongoDB = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@sandbox.6jiio2q.mongodb.net/${process.env.MONGODB_COLLECTION}?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
